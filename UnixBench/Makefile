@@ -81,22 +81,12 @@ CC=gcc
 
 ## gcc optimization flags
 ## (-ffast-math) disables strict IEEE or ISO rules/specifications for math funcs
-OPTON = -O3 -ffast-math
+#OPTON = -O3 -ffast-math
+
+OPTON = -O0
 
 ## OS detection.  Comment out if gmake syntax not supported by other 'make'.
 OSNAME:=$(shell uname -s)
-
-ifeq ($(OSNAME),Linux)
-OPTON += -march=native -mtune=native
-endif
-ifeq ($(OSNAME),Darwin)
-# (adjust flags or comment out this section for older versions of XCode or OS X)
-# (-mmacosx-versin-min= requires at least that version of SDK be installed)
-OPTON += -march=native -mmacosx-version-min=10.10
-#http://stackoverflow.com/questions/9840207/how-to-use-avx-pclmulqdq-on-mac-os-x-lion/19342603#19342603
-CFLAGS += -Wa,-q
-endif
-
 
 ## generic gcc CFLAGS.  -DTIME must be included.
 CFLAGS += -Wall -pedantic $(OPTON) -I $(SRCDIR) -DTIME
